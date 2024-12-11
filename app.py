@@ -8,7 +8,7 @@ from PIL import Image, ImageOps
 st.set_page_config(layout="wide")
 
 # Load the model once to improve performance
-@st.cache_resource
+@st.cache
 def load_model():
     model = tf.keras.models.load_model('inception.hdf5')
     return model
