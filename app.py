@@ -75,7 +75,7 @@ with col1:
 with col2:
     
     # You can replace the image URL with your local file or a web image URL
-    st.image("images/coffee_beans_image.png", caption="Fresh Coffee Beans", use_container_width=True)
+    st.image("images/coffee_beans_image.png", caption="Fresh Coffee Beans", use_column_width=True)
 
 
 # Instructions for the user
