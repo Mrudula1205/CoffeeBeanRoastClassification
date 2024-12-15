@@ -98,7 +98,7 @@ if input_method == "Upload Image":
     if file is not None:
         image = Image.open(file)
         # Display the uploaded image with better styling
-        st.image(image, use_column_width=True, caption="Uploaded Image", output_format="PNG", class_="st-uploaded-image")
+        st.image(image, use_column_width=True, caption="Uploaded Image")
 
         # Prediction logic
         model = load_model()
@@ -119,7 +119,7 @@ elif input_method == "Use Camera":
     if img:
         image = Image.open(img)
         # Display the captured image with better styling
-        st.image(image, use_column_width=True, caption="Captured Image", output_format="PNG", class_="st-uploaded-image")
+        st.image(image, use_column_width=True, caption="Captured Image")
 
         # Prediction logic
         model = load_model()
@@ -139,7 +139,7 @@ elif input_method == "Input Image URL":
     if image_url:
         image = Image.open(image_url)
         # Display the image from URL
-        st.image(image, use_column_width=True, caption="Image from URL", output_format="PNG", class_="st-uploaded-image")
+        st.image(image, use_column_width=True, caption="Image from URL")
 
         # Prediction logic
         model = load_model()
