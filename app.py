@@ -139,6 +139,15 @@ elif input_method == "Input Image URL":
     if image_url:
         image = Image.open(image_url)
         # Display the image from URL
+        import requests
+        from io import BytesIO
+
+        # Fetch the image from the URL
+        response = requests.get(image_url)
+        response.raise_for_status()  # Check if the request was successful
+
+        # Open the image from the response content
+        image = Image.open(BytesIO(response.content))
         st.image(image, use_column_width=True, caption="Image from URL")
 
         # Prediction logic
