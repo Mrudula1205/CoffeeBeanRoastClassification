@@ -10,7 +10,7 @@ st.set_page_config(layout="wide")
 # Load the model once to improve performance
 @st.cache
 def load_model():
-    model = tf.keras.models.load_model('inception.hdf5')
+    model = tf.keras.models.load_model('vgg.hdf5')
     return model
 
 # Apply custom styling
