@@ -137,7 +137,7 @@ elif input_method == "Input Image URL":
     image_url = st.text_input("Enter Image URL:")
 
     if image_url:
-        image = Image.open(image_url)
+        #image = Image.open(image_url)
         # Display the image from URL
         import requests
         from io import BytesIO
