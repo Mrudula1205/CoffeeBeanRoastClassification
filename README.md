@@ -34,3 +34,4 @@ The dataset was trained with 3 CNN architectures- ResNet-152 V2, VGG-16 and Ince
 
 ## Deployment
 [Streamlit App](https://coffeeroastclassification.streamlit.app/)
+![Deployed Webapp](
