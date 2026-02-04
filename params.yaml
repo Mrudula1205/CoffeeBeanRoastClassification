@@ -1,0 +1,27 @@
+# Data Configuration
+data:
+  image_size: [224, 224]
+  batch_size: 64
+  class_names: ['Dark', 'Green', 'Light', 'Medium']
+  validation_split: 0.1
+
+# Model Hyperparameters (From your Inception logic)
+model:
+  base_model: "InceptionV3"
+  weights: "imagenet"
+  learning_rate: 0.001
+  dropout_rate: 0.5
+  dense_units: 1024
+  epochs: 25
+
+# Augmentation Parameters (Matching your notebook Cell 9)
+augmentation:
+  rescale: 0.00392156862  # This is 1/255
+  rotation_range: 45
+  width_shift_range: 0.3
+  height_shift_range: 0.3
+  shear_range: 0.25
+  zoom_range: 0.25
+  horizontal_flip: True
+  vertical_flip: True
+  fill_mode: "reflect"
