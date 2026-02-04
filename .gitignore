@@ -1,0 +1,54 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.env
+.venv/
+venv/
+env/
+
+# Packaging/build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Logs
+logs/
+*.log
+
+# Models and training artifacts
+models/
+model/
+checkpoints/
+tensorboard/
+events.out.tfevents.*
+*.h5
+*.hdf5
+
+# Data folders (local downloads)
+CoffeeBeanQualityData/
+data/
+dataset/
+datasets/
+
+# Streamlit
+.streamlit/
+.streamlit/secrets.toml
+
+# Editor/IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Devcontainer local caches
+.devcontainer/.cache/
