@@ -10,7 +10,6 @@ setup(
     packages=find_packages(where="src"),
     install_requires=[
         "tensorflow",
-        "opencv-python",
         "pandas",
         "kagglehub",
         "pyyaml",

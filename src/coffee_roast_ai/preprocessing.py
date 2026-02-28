@@ -1,4 +1,3 @@
-import cv2
 import numpy as np
 from PIL import Image
 
@@ -9,14 +8,13 @@ def process_image(image_input, target_size=(224, 224)):
     """
     # 1. Handle different input types (Path string vs PIL Image from Streamlit)
     if isinstance(image_input, str):
-        image = cv2.imread(image_input)
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        image = Image.open(image_input).convert('RGB')
     else:
-        # Convert PIL to RGB and then to numpy array
-        image = np.array(image_input.convert('RGB'))
+        image = image_input.convert('RGB')
 
-    # 2. Resize
-    image = cv2.resize(image, target_size)
+    # 2. Resize using PIL (no libGL dependency)
+    image = image.resize(target_size)
+    image = np.array(image)
 
     # 3. Rescale (Crucial: matching your 1./255 logic)
     image = image.astype('float32') / 255.0

@@ -2,7 +2,6 @@ scikit-learn>=1.5.0
 altair==4.1.0
 streamlit
 tensorflow
-opencv-python
 numpy
 matplotlib
 Pillow
