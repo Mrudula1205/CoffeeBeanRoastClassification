@@ -48,5 +48,8 @@ class CoffeeModelEngine:
             self.model.save(path)
 
     def load_existing_model(self, path="inception.hdf5"):
-        self.model = tf.keras.models.load_model(path)
+        # Rebuild architecture to avoid Keras version config deserialization issues,
+        # then load only the saved weights from the .hdf5 file.
+        self.build_inception_model()
+        self.model.load_weights(path, by_name=True, skip_mismatch=True)
         return self.model
