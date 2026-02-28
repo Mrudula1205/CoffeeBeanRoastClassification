@@ -1,0 +1,12 @@
+research/
+.git/
+.github/
+.devcontainer/
+.env
+.gitignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+README.md
