@@ -100,11 +100,14 @@ jobs:
       - name: Create model placeholder
         run: mkdir -p models && [ -f models/inception_v1.hdf5 ] || touch models/inception_v1.hdf5
 
+      - name: Lowercase repository owner
+        run: echo "REPO_OWNER=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Build and push image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/coffee-roast-ai:latest
-            ghcr.io/${{ github.repository_owner }}/coffee-roast-ai:${{ github.sha }}
+            ghcr.io/${{ env.REPO_OWNER }}/coffee-roast-ai:latest
+            ghcr.io/${{ env.REPO_OWNER }}/coffee-roast-ai:${{ github.sha }}
