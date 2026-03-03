@@ -1,4 +1,5 @@
 import os
+import shutil
 from dotenv import load_dotenv
 import streamlit as st
 from PIL import Image
@@ -22,7 +23,7 @@ def ensure_model_available() -> str:
     if not os.path.exists(LOCAL_MODEL_PATH):
         os.makedirs("models", exist_ok=True)
         cached = hf_hub_download(repo_id=HF_REPO_ID, filename=HF_FILENAME)
-        os.replace(cached, LOCAL_MODEL_PATH)
+        shutil.copy2(cached, LOCAL_MODEL_PATH)
     return LOCAL_MODEL_PATH
 
 
