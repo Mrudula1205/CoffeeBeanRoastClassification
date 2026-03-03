@@ -13,7 +13,7 @@
 ## 🚀 Features
 
 - **Multi-Architecture Benchmarking**: Trained and evaluated InceptionV3, ResNet-152 V2, and VGG-16 on identical splits
-- **97% Accuracy**: InceptionV3 achieves state-of-the-art performance on the 4-class roast dataset
+- **95% Accuracy**: InceptionV3 achieves state-of-the-art performance on the 4-class roast dataset
 - **Real-Time QC Validation**: Upload a batch photo and instantly verify it against a target roast profile
 - **Modular ML Pipeline**: Clean `src/` package separating ingestion, preprocessing, model engine, and inference
 - **Dockerized**: Single `docker build` + `docker run` for fully reproducible deployments
@@ -25,9 +25,9 @@
 
 | Model | Accuracy | Precision | Recall | F1 Score |
 |---|---|---|---|---|
-| **InceptionV3** ⭐ | **0.97** | **0.97** | **0.97** | **0.97** |
-| ResNet-152 V2 | 0.96 | 0.91 | 0.96 | 0.92 |
-| VGG-16 | 0.96 | 0.91 | 0.96 | 0.91 |
+| **InceptionV3** ⭐ | **0.95** | **0.97** | **0.97** | **0.97** |
+| ResNet-152 V2 | 0.96 | 0.96 | 0.96 | 0.96 |
+| VGG-16 | 0.91 | 0.92 | 0.91 | 0.91 |
 
 ---
 
