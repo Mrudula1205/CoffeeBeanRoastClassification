@@ -1,6 +1,7 @@
 import numpy as np
 from PIL import Image
 
+
 def process_image(image_input, target_size=(224, 224)):
     """
     Standardizes input images (from path or PIL) for the model.
@@ -21,8 +22,9 @@ def process_image(image_input, target_size=(224, 224)):
 
     # 4. Expand dimensions for the model (Batch size of 1)
     image = np.expand_dims(image, axis=0)
-    
+
     return image
+
 
 def get_color_metrics(image_array):
     """

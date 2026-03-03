@@ -2,6 +2,7 @@ import tensorflow as tf
 from tensorflow.keras import applications, layers, models, Input
 from .utils import read_params
 
+
 class CoffeeModelEngine:
     def __init__(self):
         self.config = read_params()
@@ -14,7 +15,7 @@ class CoffeeModelEngine:
         Recreates the architecture from your notebook (Cell 15/16).
         """
         img_shape = (*self.data_cfg['image_size'], 3)
-        
+
         # 1. Load Base InceptionV3
         base_model = applications.InceptionV3(
             weights=self.model_cfg['weights'],
@@ -29,12 +30,12 @@ class CoffeeModelEngine:
         x = layers.GlobalAveragePooling2D()(x)
         x = layers.Dense(self.model_cfg['dense_units'], activation='relu')(x)
         x = layers.Dropout(self.model_cfg['dropout_rate'])(x)
-        
+
         # 4 outputs for ['Dark', 'Green', 'Light', 'Medium']
         outputs = layers.Dense(len(self.data_cfg['class_names']), activation='sigmoid')(x)
-        
+
         self.model = models.Model(inputs, outputs)
-        
+
         # 3. Compile
         self.model.compile(
             optimizer=tf.keras.optimizers.Adam(learning_rate=self.model_cfg['learning_rate']),

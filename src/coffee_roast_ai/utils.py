@@ -1,5 +1,5 @@
 import yaml
-from pathlib import Path
+
 
 def read_params(config_path="params.yaml"):
     """

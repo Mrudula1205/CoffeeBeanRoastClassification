@@ -22,6 +22,10 @@ dist/
 logs/
 *.log
 
+# MLflow
+mlruns/
+mlflow.db
+
 # Models and training artifacts
 models/
 model/

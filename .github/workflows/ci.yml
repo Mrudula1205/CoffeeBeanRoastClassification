@@ -1,0 +1,110 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # ─────────────────────────────────────────────
+  # Stage 1: Lint
+  # ─────────────────────────────────────────────
+  lint:
+    name: Lint (flake8)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install flake8
+        run: pip install flake8
+
+      - name: Run flake8
+        run: |
+          flake8 src/ app.py main.py \
+            --max-line-length=120 \
+            --ignore=W503,E501
+
+  # ─────────────────────────────────────────────
+  # Stage 2: Unit Tests
+  # ─────────────────────────────────────────────
+  test:
+    name: Unit Tests (pytest)
+    runs-on: ubuntu-latest
+    needs: lint
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install lightweight test dependencies
+        # Only installs what the unit-tested modules actually need.
+        # TensorFlow is intentionally excluded — model tests run locally/GPU runners.
+        run: pip install numpy pillow pyyaml pytest
+
+      - name: Run unit tests
+        run: pytest tests/ -v --tb=short
+
+  # ─────────────────────────────────────────────
+  # Stage 3: Docker Build (validates Dockerfile)
+  # ─────────────────────────────────────────────
+  docker-build:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create model placeholder for build validation
+        # The real .hdf5 is not stored in git (too large).
+        # A zero-byte placeholder lets the Dockerfile COPY succeed in CI.
+        run: mkdir -p models && [ -f models/inception_v1.hdf5 ] || touch models/inception_v1.hdf5
+
+      - name: Build Docker image
+        run: docker build -t coffee-roast-ai:${{ github.sha }} .
+
+  # ─────────────────────────────────────────────
+  # Stage 4: Push to GHCR (main branch only)
+  # ─────────────────────────────────────────────
+  docker-push:
+    name: Push to GHCR
+    runs-on: ubuntu-latest
+    needs: docker-build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create model placeholder
+        run: mkdir -p models && [ -f models/inception_v1.hdf5 ] || touch models/inception_v1.hdf5
+
+      - name: Build and push image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/coffee-roast-ai:latest
+            ghcr.io/${{ github.repository_owner }}/coffee-roast-ai:${{ github.sha }}
