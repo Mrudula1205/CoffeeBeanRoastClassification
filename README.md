@@ -65,7 +65,7 @@ Trained with **Adam** optimizer, **Categorical Cross-Entropy** loss, for **25 ep
 | Select target roast from sidebar | System predicts roast type and compares |
 | ✅ **PASS** — batch matches the target profile | ❌ **FAIL** — roast mismatch with corrective guidance |
 
-> Live demo: [coffeeroastclassification.streamlit.app](https://coffeeroastclassification.streamlit.app/)
+> Live demo: [coffeeroastclassification.streamlit.app](https://coffeebeanroastclassification.streamlit.app/)
 
 ---
 
