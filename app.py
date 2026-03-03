@@ -13,7 +13,6 @@ HF_REPO_ID = os.getenv("HF_REPO_ID")
 HF_FILENAME = os.getenv("HF_FILENAME")
 LOCAL_MODEL_PATH = "models/inception_v1.hdf5"
 
-
 def ensure_model_available() -> str:
     """
     Returns a local path to the model file.
