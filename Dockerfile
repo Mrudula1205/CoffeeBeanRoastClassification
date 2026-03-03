@@ -17,7 +17,6 @@ RUN pip install --no-cache-dir -e .
 COPY config/ ./config/
 COPY params.yaml .
 COPY models/ ./models/
-COPY templates/ ./templates/
 COPY app.py .
 COPY main.py .
 
