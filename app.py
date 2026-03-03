@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 import streamlit as st
 from PIL import Image
 import numpy as np
@@ -7,8 +8,7 @@ from src.coffee_roast_ai.preprocessing import process_image
 from src.coffee_roast_ai.model_engine import CoffeeModelEngine
 from src.coffee_roast_ai.utils import read_params
 
-# ── Hugging Face model config ──────────────────────────────────────────────
-# Set these to your Hugging Face repo. Example: "mrudula/coffee-roast-ai"
+load_dotenv() 
 HF_REPO_ID = os.getenv("HF_REPO_ID")
 HF_FILENAME = os.getenv("HF_FILENAME")
 LOCAL_MODEL_PATH = "models/inception_v1.hdf5"
